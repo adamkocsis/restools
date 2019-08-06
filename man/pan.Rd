@@ -10,7 +10,7 @@ pan11(a, name = NULL, format = NULL, path = NULL, width = NULL,
 
 pan21(a, b, name = NULL, format = NULL, path = NULL, width = NULL,
   height = NULL, pind = c("A", "B"), outmai = NULL, intop = NULL,
-  inbot = NULL)
+  inbot = NULL, pcx = 1)
 }
 \arguments{
 \item{a}{Expression or path (as character string). Panel A plotting insturctions.}
