@@ -1,7 +1,7 @@
 Package: restools
 Type: Package
 Title: Research tools
-Version: 0.0.1-1
+Version: 0.0.1-2
 Author: Adam T. Kocsis
 Maintainer: Adam T. Kocsis <adam.t.kocsis@gmail.com>
 Description: Customized, deployable tools for efficient research. 

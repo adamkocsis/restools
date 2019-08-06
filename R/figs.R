@@ -106,14 +106,14 @@ pan11 <- function(a, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL,
 #' @param inbot Numeric value. The bottom marign of the upper plot. 
 #' @rdname pan
 #' @export
-pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B"), outmai=NULL, intop=NULL, inbot=NULL){
+pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B"), outmai=NULL, intop=NULL, inbot=NULL, pcx=1){
 
 	
 	if(is.null(inbot)) inbot <- 0
 	if(is.null(intop)) intop <- 2.1/5
 
 	# default height, based on valuable plotting area
-	if(is.null(width)) width<-10
+	if(is.null(width)) width<-6
 	if(is.null(height)){
 		heightOrig<-c(width,width)
 	}else{
@@ -140,12 +140,15 @@ pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL
 		outmai[1]+intop+plotar[2]
 	)
 
-	diffh<- sum(heightOrig)-sum(height)
+	# mod
+	maxHeight <- ceiling(sum(height))
+	diffh<- maxHeight-sum(height)
+
 	height <- c(height,diffh)
 
 
 	# 1. open image
-	openimage(name=name, format=format, path=path, width=width, height=sum(heightOrig))
+	openimage(name=name, format=format, path=path, width=width, height=maxHeight)
 
 	# structure plot
 	ratio <- matrix(c(1,2,3), ncol=1)
@@ -162,7 +165,7 @@ pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL
 		if(is.expression(a)) eval(a)
 
 		#put the panel id on it
-		panelID(pind[1])
+		panelID(pind[1],  cex=height[1]*pcx, pos=4,, offset=c(0, -0.05))
 
 	# panel b
 		graphics::par(mai=c(outmai[1:2], intop, outmai[4]))
@@ -171,7 +174,7 @@ pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL
 		if(is.expression(b)) eval(b)
 
 		#put the panel id on it
-		panelID(pind[2])
+		panelID(pind[2],  cex=height[1]*pcx, pos=4, offset=c(0, -0.05))
 
 	# 3. if format is not NULL, close the device
 	if(!is.null(format) & !is.null(name)) dev.off()
