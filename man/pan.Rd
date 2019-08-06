@@ -3,7 +3,8 @@
 \name{pan11}
 \alias{pan11}
 \alias{pan21}
-\title{Predefined multipanel plotting.}
+\alias{pan22}
+\title{Predefined multipanel governor plotting.}
 \usage{
 pan11(a, name = NULL, format = NULL, path = NULL, width = NULL,
   height = NULL, pind = "small")
@@ -11,6 +12,11 @@ pan11(a, name = NULL, format = NULL, path = NULL, width = NULL,
 pan21(a, b, name = NULL, format = NULL, path = NULL, width = NULL,
   height = NULL, pind = c("A", "B"), outmai = NULL, intop = NULL,
   inbot = NULL, pcx = 1)
+
+pan22(a, b, c, d, name = NULL, format = NULL, path = NULL,
+  width = NULL, height = NULL, pind = c("A", "B", "C", "D"),
+  outmai = NULL, intop = NULL, inbot = NULL, inleft = NULL,
+  inright = NULL, pcx = 1)
 }
 \arguments{
 \item{a}{Expression or path (as character string). Panel A plotting insturctions.}
@@ -32,6 +38,14 @@ pan21(a, b, name = NULL, format = NULL, path = NULL, width = NULL,
 \item{intop}{Numeric value. The top margin of the lower plot in inches. If outmai is NULL then the top margin of the plot.}
 
 \item{inbot}{Numeric value. The bottom marign of the upper plot.}
+
+\item{c}{Expression or path (as character string). Panel C plotting insturctions.}
+
+\item{d}{Expression or path (as character string). Panel D plotting insturctions.}
+
+\item{inleft}{Numeric value. The left margin of the plots to the right in inches.}
+
+\item{inright}{Numeric value. The right margin of the plots to the left in inches.}
 }
 \description{
 The function is useful for the effective combination of multipanel plots.

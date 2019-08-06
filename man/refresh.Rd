@@ -2,9 +2,12 @@
 % Please edit documentation in R/utility.R
 \name{funky}
 \alias{funky}
+\alias{plotz}
 \title{Sources all files from the designated path}
 \usage{
 funky(path = "scripts/methods/")
+
+plotz(path = "scripts/plots/")
 }
 \arguments{
 \item{path}{Character value. A path to a folder.}
