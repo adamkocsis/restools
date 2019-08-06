@@ -1,0 +1,23 @@
+Package: restools
+Type: Package
+Title: Research tools
+Version: 0.0.1-1
+Author: Adam T. Kocsis
+Maintainer: Adam T. Kocsis <adam.t.kocsis@gmail.com>
+Description: Customized, deployable tools for efficient research. 
+License: CC BY 4.0
+Date: 2019-08-06
+BugReports: https://github.com/adamkocsis/restools/issues
+Encoding: UTF-8
+LazyData: false
+Depends:
+    R (>= 3.5.0)
+Imports: 
+	graphics,
+	grDevices
+NeedsCompilation: no
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
+Suggests:
+    knitr,
+    rmarkdown
