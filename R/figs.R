@@ -204,6 +204,7 @@ pan22 <- function(a,b,c,d, name=NULL, format=NULL, path=NULL, width=NULL, height
 	if(is.null(inright)) inright <- 2.1/5
 	if(is.null(inleft)) inleft <- 4.1/5
 
+	if(length(width)!=2) stop("The length of width is not 2.")
 	# default height, based on valuable plotting area
 	if(is.null(width)){
 		widthOrig<-c(6,6)
