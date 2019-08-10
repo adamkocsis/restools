@@ -1,5 +1,9 @@
 # Change log of the R package 'restools'
 
+## [0.8]  - 2019-08-10 
+### Added
+- setver(), getver(), sessionVersion variable, and newstudy()
+
 ## [0.7]  - 2019-08-05 
 ### Added
 - added multipanel governor pan22()

@@ -74,7 +74,7 @@ plotz<- function(path="scripts/plots/"){
 #' @param folder 
 #' @rdname results
 #' @export
-stores <- function(x, v, within="export/", folder="res/"){
+stores <- function(x, v=sessionVersion, within="export/", folder="res/"){
 
   path<- paste(within, v,"/",folder, sep="")
 
@@ -90,7 +90,7 @@ stores <- function(x, v, within="export/", folder="res/"){
 
 #' @rdname results
 #' @export
-results<- function(v, within="export/", folder="res/"){
+results<- function(v=sessionVersion, within="export/", folder="res/"){
   path<- paste(within, v,"/",folder, sep="")
  all<-list.files(path)
   # get the R files
@@ -110,3 +110,47 @@ results<- function(v, within="export/", folder="res/"){
 
   }
 }
+
+
+#' Function to create standard folder structure of a new study
+#' 
+#' New folder structure
+#' 
+#' @param ver Character. The session version identifier. 
+#' 
+#' @export
+newstudy<- function(ver=sessionVersion){
+  system("mkdir doc")
+  system("mkdir data")
+  system("mkdir export")
+  system("mkdir scripts")
+
+  system("mkdir scripts/methods")
+  system("mkdir scripts/plots")
+  if(!is.null(ver)){
+    system(paste("mkdir export/", ver, sep=""))
+    system(paste("mkdir export/", ver, "/res",sep=""))
+     setver(ver)
+     message(paste("The session version is set to '", ver, "'.", sep=""))
+  }
+}
+
+#' Assign a new value to the session version
+#' 
+#' The function is used to change the 'sessionVersion' object
+#' 
+#' @param ver Character. The session version identifier. 
+#' 
+#' @export
+#' @rdname ver
+setver <- function(ver){
+  assignInNamespace("sessionVersion", ver, ns="restools") 
+}
+
+#' @rdname ver
+#' @export
+getver<- function(){
+  getFromNamespace("sessionVersion", ns="restools") 
+}
+
+sessionVersion<-NULL

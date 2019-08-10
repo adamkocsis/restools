@@ -5,9 +5,9 @@
 \alias{results}
 \title{Result storage}
 \usage{
-stores(x, v, within = "export/", folder = "res/")
+stores(x, v = sessionVersion, within = "export/", folder = "res/")
 
-results(v, within = "export/", folder = "res/")
+results(v = sessionVersion, within = "export/", folder = "res/")
 }
 \arguments{
 \item{x}{R object to be saved as a result.}
