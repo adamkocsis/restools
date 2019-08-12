@@ -4,6 +4,8 @@
 \alias{pan11}
 \alias{pan21}
 \alias{pan22}
+\alias{pan32}
+\alias{pan23}
 \title{Predefined multipanel governor plotting.}
 \usage{
 pan11(a, name = NULL, format = NULL, path = NULL, width = NULL,
@@ -16,6 +18,16 @@ pan21(a, b, name = NULL, format = NULL, path = NULL, width = NULL,
 pan22(a, b, c, d, name = NULL, format = NULL, path = NULL,
   width = NULL, height = NULL, pind = c("A", "B", "C", "D"),
   outmai = NULL, intop = NULL, inbot = NULL, inleft = NULL,
+  inright = NULL, pcx = 1)
+
+pan32(a, b, c, d, e, f, name = NULL, format = NULL, path = NULL,
+  width = NULL, height = NULL, pind = c("A", "B", "C", "D", "E",
+  "F"), outmai = NULL, intop = NULL, inbot = NULL, inleft = NULL,
+  inright = NULL, pcx = 1)
+
+pan23(a, b, c, d, e, f, name = NULL, format = NULL, path = NULL,
+  width = NULL, height = NULL, pind = c("A", "B", "C", "D", "E",
+  "F"), outmai = NULL, intop = NULL, inbot = NULL, inleft = NULL,
   inright = NULL, pcx = 1)
 }
 \arguments{
@@ -42,6 +54,14 @@ pan22(a, b, c, d, name = NULL, format = NULL, path = NULL,
 \item{c}{Expression or path (as character string). Panel C plotting insturctions.}
 
 \item{d}{Expression or path (as character string). Panel D plotting insturctions.}
+
+\item{inleft}{Numeric value. The left margin of the plots to the right in inches.}
+
+\item{inright}{Numeric value. The right margin of the plots to the left in inches.}
+
+\item{e}{Expression or path (as character string). Panel C plotting insturctions.}
+
+\item{f}{Expression or path (as character string). Panel D plotting insturctions.}
 
 \item{inleft}{Numeric value. The left margin of the plots to the right in inches.}
 

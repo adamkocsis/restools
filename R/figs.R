@@ -310,6 +310,275 @@ pan22 <- function(a,b,c,d, name=NULL, format=NULL, path=NULL, width=NULL, height
 
 
 
+#' @param e Expression or path (as character string). Panel C plotting insturctions.
+#' @param f Expression or path (as character string). Panel D plotting insturctions.
+#' @param inleft Numeric value. The left margin of the plots to the right in inches. 
+#' @param inright Numeric value. The right margin of the plots to the left in inches. 
+#' @rdname pan
+#' @export
+pan32 <- function(a,b,c,d, e,f, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D", "E", "F"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
+	
+	if(is.null(inbot)) inbot <- 0
+	if(is.null(intop)) intop <- 2.1/5
+	if(is.null(inright)) inright <- 2.1/5
+	if(is.null(inleft)) inleft <- 4.1/5
+
+	if(length(width)!=2) stop("The length of width is not 2.")
+	if(length(height)!=3) stop("The length of height is not 3.")
+	
+	# default height, based on valuable plotting area
+	if(is.null(width)){
+		widthOrig<-c(6,6)
+	}else{
+		widthOrig <-width
+	} 
+	if(is.null(height)){
+		heightOrig<-c(widthOrig, widthOrig[1])
+	}else{
+		heightOrig <- height
+	}
+
+	# use R default plotting margins as a template
+	origmai <- c(1.02, 0.82, 0.82, 0.42)
+
+	# set the outer plot margins
+	if(!is.null(outmai)){
+		if(length(outmai)!=4) stop("you need 4 numeric margin values")
+
+	}else{
+		outmai <- c(1.02, 0.82, intop, 0.42)
+	}
+
+	# vertical
+		# valueable plotting area
+		plotv <- heightOrig-origmai[1]-origmai[3]
+
+		# the calculated height
+		height<- c(
+			outmai[3]+inbot+plotv[1],
+			inbot+intop+plotv[2],
+			outmai[1]+intop+plotv[3]
+		)
+
+		# mod
+		maxHeight <- ceiling(sum(height))
+		diffh<- maxHeight-sum(height)
+
+		height <- c(height,diffh)
+
+	# horizontal
+		# valueable plotting area
+		ploth <- widthOrig-origmai[2]-origmai[4]
+
+		# the calculated height
+		width<- c(
+			outmai[2]+inright+ploth[1],
+			outmai[4]+inleft+ploth[2]
+		)
+
+		# mod
+		maxWidth <- ceiling(sum(width))
+		diffv<- maxWidth-sum(width)
+
+		width <- c(width, diffv)
+
+
+	# 1. open image
+	openimage(name=name, format=format, path=path, width=maxWidth, height=maxHeight)
+
+	# structure plot
+	ratio <- matrix(c(1,2,0,3,4,0, 5,6,0, 0,0,0), ncol=3, byrow=TRUE)
+	#layout(ratio)
+	graphics::layout(mat=ratio, heights=height*100, widths=width*100)
+
+
+	
+	# 2call the plots, one by one
+	# panel a
+		graphics::par(mai=c(inbot, outmai[2:3], inright))
+		
+		callplot(a)
+
+		#put the panel id on it
+		panelID(pind[1],  cex=heightOrig[1]*pcx, pos=4,, offset=c(0, -0.05))
+
+	# panel b
+		graphics::par(mai=c(inbot, inleft, outmai[3:4]))
+		
+		callplot(b)
+
+		#put the panel id on it
+		panelID(pind[2],  cex=heightOrig[1]*pcx, pos=4,, offset=c(0, -0.05))
+
+	# panel c
+		graphics::par(mai=c(inbot, outmai[2], intop, inright))
+		
+		callplot(c)
+
+		#put the panel id on it
+		panelID(pind[3],  cex=heightOrig[2]*pcx, pos=4, offset=c(0, -0.05))
+
+	# panel d
+		graphics::par(mai=c(inbot,inleft, intop, outmai[4]))
+		
+		callplot(d)
+
+		#put the panel id on it
+		panelID(pind[4],  cex=heightOrig[2]*pcx, pos=4, offset=c(0, -0.05))
+	
+	# panel e
+		graphics::par(mai=c(outmai[1:2], intop, inright))
+		
+		callplot(e)
+
+		#put the panel id on it
+		panelID(pind[5],  cex=heightOrig[3]*pcx, pos=4, offset=c(0, -0.05))
+
+	# panel f
+		graphics::par(mai=c(outmai[1],inleft, intop, outmai[4]))
+		
+		callplot(f)
+
+		#put the panel id on it
+		panelID(pind[6],  cex=heightOrig[3]*pcx, pos=4, offset=c(0, -0.05))
+
+	# 3. if format is not NULL, close the device
+	if(!is.null(format) & !is.null(name)) dev.off()
+}
+
+
+#' @rdname pan
+#' @export
+pan23 <- function(a,b,c,d, e,f, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D", "E", "F"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
+	
+	if(is.null(inbot)) inbot <- 0
+	if(is.null(intop)) intop <- 2.1/5
+	if(is.null(inright)) inright <- 2.1/5
+	if(is.null(inleft)) inleft <- 4.1/5
+
+	if(length(width)!=3) stop("The length of width is not 3.")
+	if(length(height)!=2) stop("The length of height is not 2.")
+	
+	# default height, based on valuable plotting area
+	if(is.null(width)){
+		widthOrig<-c(6,6,6)
+	}else{
+		widthOrig <-width
+	} 
+	if(is.null(height)){
+		heightOrig<-c(widthOrig[1:2])
+	}else{
+		heightOrig <- height
+	}
+
+	# use R default plotting margins as a template
+	origmai <- c(1.02, 0.82, 0.82, 0.42)
+
+	# set the outer plot margins
+	if(!is.null(outmai)){
+		if(length(outmai)!=4) stop("you need 4 numeric margin values")
+
+	}else{
+		outmai <- c(1.02, 0.82, intop, 0.42)
+	}
+
+	# vertical
+		# valueable plotting area
+		plotv <- heightOrig-origmai[1]-origmai[3]
+
+		# the calculated height
+		height<- c(
+			outmai[3]+inbot+plotv[1],
+			outmai[1]+intop+plotv[2]
+		)
+
+		# mod
+		maxHeight <- ceiling(sum(height))
+		diffh<- maxHeight-sum(height)
+
+		height <- c(height,diffh)
+
+	# horizontal
+		# valueable plotting area
+		ploth <- widthOrig-origmai[2]-origmai[4]
+
+		# the calculated height
+		width<- c(
+			outmai[2]+inright+ploth[1],
+			inright+inleft+ploth[2],
+			outmai[4]+inleft+ploth[3]
+		)
+
+		# mod
+		maxWidth <- ceiling(sum(width))
+		diffv<- maxWidth-sum(width)
+
+		width <- c(width, diffv)
+
+
+	# 1. open image
+	openimage(name=name, format=format, path=path, width=maxWidth, height=maxHeight)
+
+	# structure plot
+	ratio <- matrix(c(1,2,3,0,4,5,6,0,0,0,0,0), ncol=4, byrow=TRUE)
+	#layout(ratio)
+	graphics::layout(mat=ratio, heights=height*100, widths=width*100)
+
+
+	
+	# 2call the plots, one by one
+	# panel a
+		graphics::par(mai=c(inbot, outmai[2:3], inright))
+		
+		callplot(a)
+
+		#put the panel id on it
+		panelID(pind[1],  cex=heightOrig[1]*pcx, pos=4,, offset=c(0, -0.05))
+
+	# panel b
+		graphics::par(mai=c(inbot, inleft, outmai[3], inright))
+		
+		callplot(b)
+
+		#put the panel id on it
+		panelID(pind[2],  cex=heightOrig[1]*pcx, pos=4,, offset=c(0, -0.05))
+
+	# panel c
+		graphics::par(mai=c(inbot, inleft, outmai[3:4]))
+		
+		callplot(c)
+
+		#put the panel id on it
+		panelID(pind[3],  cex=heightOrig[1]*pcx, pos=4, offset=c(0, -0.05))
+
+	# panel d
+		graphics::par(mai=c(outmai[1:2], intop, inright))
+		
+		callplot(d)
+
+		#put the panel id on it
+		panelID(pind[4],  cex=heightOrig[2]*pcx, pos=4, offset=c(0, -0.05))
+	
+	# panel e
+		graphics::par(mai=c(outmai[1],inleft, intop, inright))
+		
+		callplot(e)
+
+		#put the panel id on it
+		panelID(pind[5],  cex=heightOrig[2]*pcx, pos=4, offset=c(0, -0.05))
+
+	# panel f
+		graphics::par(mai=c(outmai[1],inleft, intop, outmai[4]))
+		
+		callplot(f)
+
+		#put the panel id on it
+		panelID(pind[6],  cex=heightOrig[2]*pcx, pos=4, offset=c(0, -0.05))
+
+	# 3. if format is not NULL, close the device
+	if(!is.null(format) & !is.null(name)) dev.off()
+}
+
 
 
 #	# condensensed layout
