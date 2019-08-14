@@ -144,7 +144,9 @@ newstudy<- function(ver=sessionVersion){
 #' @export
 #' @rdname ver
 setver <- function(ver){
-  assignInNamespace("sessionVersion", ver, ns="restools") 
+  assignInNamespace("sessionVersion", ver, ns="restools")
+  system(paste("mkdir export/", ver, sep="")) 
+  system(paste("mkdir export/", ver, "/res", sep="")) 
 }
 
 #' @rdname ver

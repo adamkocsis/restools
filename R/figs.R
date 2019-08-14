@@ -103,7 +103,11 @@ panelID <- function(label, location="topleft", x=NULL, y=NULL,
 #' @param pind Character vector of the panel identifiers.
 #' @rdname pan
 #' @export
-pan11 <- function(a, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind="small"){
+pan11 <- function(a, name=NULL, format=NULL, path=NULL, ver=sessionVersion, width=NULL, height=NULL, pind="small"){
+	if(!is.null(ver) & is.null(path)){
+		path <- paste("export/", ver, "/", sep="")
+	}
+
 	# 1. open image
 	openimage(name=name, format=format, path=path, width=width, height=height)
 	
@@ -119,8 +123,10 @@ pan11 <- function(a, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL,
 #' @param inbot Numeric value. The bottom marign of the upper plot. 
 #' @rdname pan
 #' @export
-pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B"), outmai=NULL, intop=NULL, inbot=NULL, pcx=1){
-
+pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, ver=sessionVersion, width=NULL, height=NULL, pind=c("A", "B"), outmai=NULL, intop=NULL, inbot=NULL, pcx=1){
+	if(!is.null(ver) & is.null(path)){
+		path <- paste("export/", ver, "/", sep="")
+	}
 	
 	if(is.null(inbot)) inbot <- 0
 	if(is.null(intop)) intop <- 2.1/5
@@ -191,14 +197,105 @@ pan21 <- function(a,b,name=NULL, format=NULL, path=NULL, width=NULL, height=NULL
 	if(!is.null(format) & !is.null(name)) dev.off()
 }
 
+#' @rdname pan
+#' @export
+pan31 <- function(a,b,c, name=NULL, format=NULL, path=NULL, ver=sessionVersion, width=NULL, height=NULL, pind=c("A", "B", "C"), outmai=NULL, intop=NULL, inbot=NULL, pcx=1){
+	if(!is.null(ver) & is.null(path)){
+		path <- paste("export/", ver,"/",  sep="")
+	}
+	
+	if(is.null(inbot)) inbot <- 0
+	if(is.null(intop)) intop <- 2.1/5
+
+	# default height, based on valuable plotting area
+	if(is.null(width)) width<-6
+	if(is.null(height)){
+		heightOrig<-c(width,width, width)
+	}else{
+		heightOrig <- height
+	}
+	
+	if(length(width)!=1) stop("The length of width is not 2.")
+	if(length(heightOrig)!=3) stop("The length of height is not 3.")
+	
+	# use R default plotting margins as a template
+	origmai <- c(1.02, 0.82, 0.82, 0.42)
+
+	# set the outer plot margins
+	if(!is.null(outmai)){
+		if(length(outmai)!=4) stop("you need 4 numeric margin values")
+
+	}else{
+		outmai <- c(1.02, 0.82, intop, 0.42)
+	}
+
+	# valueable plotting area
+	plotar <- heightOrig-origmai[1]-origmai[3]
+
+	# the calculated height
+	height<- c(
+		outmai[3]+inbot+plotar[1],
+		intop+inbot+plotar[2],
+		outmai[1]+intop+plotar[3]
+	)
+
+	# mod
+	maxHeight <- ceiling(sum(height))
+	diffh<- maxHeight-sum(height)
+
+	height <- c(height,diffh)
+
+
+	# 1. open image
+	openimage(name=name, format=format, path=path, width=width, height=maxHeight)
+
+	# structure plot
+	ratio <- matrix(c(1,2,3,0), ncol=1)
+	#layout(ratio)
+	graphics::layout(mat=ratio, heights=height*100)
+
+
+	
+	# 2call the plots, one by one
+	# panel a
+		graphics::par(mai=c(inbot, outmai[2:4]))
+		
+		callplot(a)
+
+		#put the panel id on it
+		panelID(pind[1],  cex=heightOrig[1]*pcx, pos=4,, offset=c(0, -0.05))
+
+	# panel b
+		graphics::par(mai=c(inbot, outmai[2], intop, outmai[4]))
+		
+		callplot(b)
+
+		#put the panel id on it
+		panelID(pind[2],  cex=heightOrig[1]*pcx, pos=4, offset=c(0, -0.05))
+	
+	# panel c
+		graphics::par(mai=c(outmai[1:2], intop, outmai[4]))
+		
+		callplot(c)
+
+		#put the panel id on it
+		panelID(pind[3],  cex=heightOrig[1]*pcx, pos=4, offset=c(0, -0.05))
+
+	# 3. if format is not NULL, close the device
+	if(!is.null(format) & !is.null(name)) dev.off()
+}
+
 #' @param c Expression or path (as character string). Panel C plotting insturctions.
 #' @param d Expression or path (as character string). Panel D plotting insturctions.
 #' @param inleft Numeric value. The left margin of the plots to the right in inches. 
 #' @param inright Numeric value. The right margin of the plots to the left in inches. 
 #' @rdname pan
 #' @export
-pan22 <- function(a,b,c,d, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
-	
+pan22 <- function(a,b,c,d, name=NULL, format=NULL, ver=sessionVersion, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
+	if(!is.null(ver) & is.null(path)){
+		path <- paste("export/", ver,"/",  sep="")
+	}
+
 	if(is.null(inbot)) inbot <- 0
 	if(is.null(intop)) intop <- 2.1/5
 	if(is.null(inright)) inright <- 2.1/5
@@ -316,8 +413,11 @@ pan22 <- function(a,b,c,d, name=NULL, format=NULL, path=NULL, width=NULL, height
 #' @param inright Numeric value. The right margin of the plots to the left in inches. 
 #' @rdname pan
 #' @export
-pan32 <- function(a,b,c,d, e,f, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D", "E", "F"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
-	
+pan32 <- function(a,b,c,d, e,f, name=NULL, format=NULL, ver=sessionVersion, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D", "E", "F"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
+	if(!is.null(ver) & is.null(path)){
+		path <- paste("export/", ver, "/", sep="")
+	}
+
 	if(is.null(inbot)) inbot <- 0
 	if(is.null(intop)) intop <- 2.1/5
 	if(is.null(inright)) inright <- 2.1/5
@@ -449,8 +549,11 @@ pan32 <- function(a,b,c,d, e,f, name=NULL, format=NULL, path=NULL, width=NULL, h
 
 #' @rdname pan
 #' @export
-pan23 <- function(a,b,c,d, e,f, name=NULL, format=NULL, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D", "E", "F"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
-	
+pan23 <- function(a,b,c,d, e,f, name=NULL, format=NULL, ver=sessionVersion, path=NULL, width=NULL, height=NULL, pind=c("A", "B", "C", "D", "E", "F"), outmai=NULL, intop=NULL, inbot=NULL, inleft=NULL, inright=NULL, pcx=1){
+	if(!is.null(ver) & is.null(path)){
+		path <- paste("export/", ver, "/", sep="")
+	}
+
 	if(is.null(inbot)) inbot <- 0
 	if(is.null(intop)) intop <- 2.1/5
 	if(is.null(inright)) inright <- 2.1/5

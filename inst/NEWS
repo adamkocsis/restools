@@ -1,39 +1,43 @@
 # Change log of the R package 'restools'
 
 
-## [0.9]  - 2019-08-12 
+## [0.10] - 2019-08-13 
+### Added
+- pan31() 
+
+## [0.9] - 2019-08-12 
 ### Added
 - pan23() and pan32()
 
-## [0.8]  - 2019-08-10 
+## [0.8] - 2019-08-10 
 ### Added
 - setver(), getver(), sessionVersion variable, and newstudy()
 - added defense for pan22()
 
-## [0.7]  - 2019-08-05 
+## [0.7] - 2019-08-05 
 ### Added
 - added multipanel governor pan22()
 
-## [0.6]  - 2019-08-05 
+## [0.6] - 2019-08-05 
 ### Added
 - result control added stores() and results()
 
-## [0.5]  - 2019-08-05 
+## [0.5] - 2019-08-05 
 ### Added
 - plotz() wrapper, get all plotting functions
 
-## [0.4]  - 2019-08-05 
+## [0.4] - 2019-08-05 
 ### Added
 - callplot() wrapper, plotting functions
 
-## [0.3]  - 2019-08-05 
+## [0.3] - 2019-08-05 
 ### Added
 - getOS() and funky()
 
-## [0.2]  - 2019-08-05 
+## [0.2] - 2019-08-05 
 ### Changed
 - Corrected fig plotting.
 
-## [0.1]  - 2019-08-05 
+## [0.1] - 2019-08-05 
 ### Added
 - Oooooh, I added a new package!

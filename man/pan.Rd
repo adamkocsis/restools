@@ -3,6 +3,7 @@
 \name{pan11}
 \alias{pan11}
 \alias{pan21}
+\alias{pan31}
 \alias{pan22}
 \alias{pan32}
 \alias{pan23}
@@ -14,6 +15,10 @@ pan11(a, name = NULL, format = NULL, path = NULL, width = NULL,
 pan21(a, b, name = NULL, format = NULL, path = NULL, width = NULL,
   height = NULL, pind = c("A", "B"), outmai = NULL, intop = NULL,
   inbot = NULL, pcx = 1)
+
+pan31(a, b, c, name = NULL, format = NULL, path = NULL,
+  width = NULL, height = NULL, pind = c("A", "B", "C"),
+  outmai = NULL, intop = NULL, inbot = NULL, pcx = 1)
 
 pan22(a, b, c, d, name = NULL, format = NULL, path = NULL,
   width = NULL, height = NULL, pind = c("A", "B", "C", "D"),
