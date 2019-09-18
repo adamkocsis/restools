@@ -6,3 +6,12 @@ This was supposed to be my quick library for research that I can use wherever I 
 
 Of course this package come with absolutely no warranty or not even anything like it (not that any other stuff of mine does). If you decide to use this and find an error, just solve it yourself - the way I do it. Nevertheless, all the different versions that I use will will be archived here.
 
+
+# In case you want to install
+
+Download the archive: https://github.com/adamkocsis/restools/raw/master/_archive/source/restools_0.10.tar.gz
+
+Save it somewhere, and then run 
+```r
+install.packages("<yourpath>/restools_0.10.tar.gz", repos=NULL)
+```
