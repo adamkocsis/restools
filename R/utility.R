@@ -98,12 +98,10 @@ results<- function(v=sessionVersion, within="export/", folder="res/"){
   allList <- strsplit(all, "\\.")
 
   logR<- unlist(lapply(allList, function(x){
-    x[2]=="RData"
+    x[length(x)]=="RData"
   }))
 
   all<-all[logR]
-
-  objname <- unlist(lapply(allList[logR], function(x) x[1]))
 
   for(i in 1:length(all)){
      load(file.path(path,all[i]), envir=globalenv())

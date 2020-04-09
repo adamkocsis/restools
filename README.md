@@ -9,9 +9,9 @@ Of course this package come with absolutely no warranty or not even anything lik
 
 # In case you want to install
 
-Download the archive: https://github.com/adamkocsis/restools/raw/master/_archive/source/restools_0.10.tar.gz
+Download the archive: https://github.com/adamkocsis/restools/raw/master/_archive/source/restools_0.11.tar.gz
 
 Save it somewhere, and then run 
 ```r
-install.packages("<yourpath>/restools_0.10.tar.gz", repos=NULL)
+install.packages("<yourpath>/restools_0.11.tar.gz", repos=NULL)
 ```
