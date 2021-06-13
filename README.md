@@ -10,5 +10,5 @@ Of course this package come with absolutely no warranty or not even anything lik
 # In case you want to install use
 
 ```r
-install.packages("https://github.com/adamkocsis/restools/raw/master/_archive/source/restools_0.10.tar.gz", repos=NULL)
+install.packages("https://github.com/adamkocsis/restools/raw/master/_archive/source/restools_0.11.tar.gz", repos=NULL)
 ```
