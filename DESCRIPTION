@@ -1,12 +1,12 @@
 Package: restools
 Type: Package
-Title: Research tools: just a very selfish package. 
-Version: 0.10
+Title: Research result versioning tools. 
+Version: 0.11
 Author: Adam T. Kocsis
 Maintainer: Adam T. Kocsis <adam.t.kocsis@gmail.com>
-Description: Customized, deployable tools for efficient research. 
+Description: Customized, deployable tools for efficient research with chaninging source data.
 License: CC BY 4.0
-Date: 2019-08-13
+Date: 2021-06-13
 BugReports: https://github.com/adamkocsis/restools/issues
 Encoding: UTF-8
 LazyData: false
